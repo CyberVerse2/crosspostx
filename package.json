@@ -9,19 +9,29 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@farcaster/hub-nodejs": "^0.13.5",
+    "@farcaster/hub-web": "^0.9.7",
+    "@privy-io/react-auth": "^2.13.6",
+    "@supabase/supabase-js": "^2.49.8",
+    "agent-twitter-client": "^0.0.18",
+    "clsx": "^2.1.1",
+    "lucide-react": "^0.511.0",
+    "next": "15.3.3",
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
-    "next": "15.3.3"
+    "tailwind-merge": "^3.3.0",
+    "viem": "^2.30.5"
   },
   "devDependencies": {
-    "typescript": "^5",
-    "@types/node": "^20",
+    "@eslint/eslintrc": "^3",
+    "@tailwindcss/postcss": "^4",
+    "@types/node": "^20.17.57",
     "@types/react": "^19",
     "@types/react-dom": "^19",
-    "@tailwindcss/postcss": "^4",
-    "tailwindcss": "^4",
+    "dotenv": "^16.5.0",
     "eslint": "^9",
     "eslint-config-next": "15.3.3",
-    "@eslint/eslintrc": "^3"
+    "tailwindcss": "^4",
+    "typescript": "^5"
   }
 }
