@@ -1,4 +1,4 @@
-import { publishCast } from './client'
+import { FarcasterCastResult } from './client'
 import { getPendingCrossposts, updateCrosspostLog } from '../supabase/database'
 import { CrosspostLog } from '../../types'
 
@@ -9,7 +9,11 @@ export interface FarcasterCrosspostResult {
   errors: string[]
 }
 
-export async function processPendingCrossposts(): Promise<FarcasterCrosspostResult> {
+// This function now requires a publishCast function to be passed in
+// since we can't use React hooks directly in this service
+export async function processPendingCrossposts(
+  publishCastFn: (text: string) => Promise<FarcasterCastResult>
+): Promise<FarcasterCrosspostResult> {
   const result: FarcasterCrosspostResult = {
     processed: 0,
     successful: 0,
@@ -24,7 +28,7 @@ export async function processPendingCrossposts(): Promise<FarcasterCrosspostResu
 
     for (const crosspost of pendingCrossposts) {
       try {
-        await processSingleCrosspost(crosspost, result)
+        await processSingleCrosspost(crosspost, result, publishCastFn)
         result.processed++
       } catch (error) {
         const errorMsg = `Error processing crosspost ${crosspost.id}: ${error instanceof Error ? error.message : 'Unknown error'}`
@@ -52,15 +56,19 @@ export async function processPendingCrossposts(): Promise<FarcasterCrosspostResu
   }
 }
 
-async function processSingleCrosspost(crosspost: CrosspostLog, result: FarcasterCrosspostResult): Promise<void> {
+async function processSingleCrosspost(
+  crosspost: CrosspostLog, 
+  result: FarcasterCrosspostResult,
+  publishCastFn: (text: string) => Promise<FarcasterCastResult>
+): Promise<void> {
   console.log(`Processing crosspost for tweet: ${crosspost.tweet_id}`)
 
   try {
     // Format the tweet content for Farcaster
     const castText = formatTweetForFarcaster(crosspost.tweet_text, crosspost.tweet_url)
 
-    // Publish to Farcaster
-    const castResult = await publishCast(castText)
+    // Publish to Farcaster using the provided function
+    const castResult = await publishCastFn(castText)
 
     if (castResult.success && castResult.hash) {
       // Update crosspost log with success
@@ -113,11 +121,13 @@ function formatTweetForFarcaster(tweetText: string, tweetUrl: string): string {
   return castText
 }
 
-export async function testFarcasterConnection(): Promise<{ success: boolean; message: string }> {
+export async function testFarcasterConnection(
+  publishCastFn: (text: string) => Promise<FarcasterCastResult>
+): Promise<{ success: boolean; message: string }> {
   try {
     // Try to publish a test cast
     const testText = `Test cast from CrossPostX - ${new Date().toISOString()}`
-    const result = await publishCast(testText)
+    const result = await publishCastFn(testText)
     
     if (result.success) {
       return {
@@ -141,11 +151,12 @@ export async function testFarcasterConnection(): Promise<{ success: boolean; mes
 export async function crosspostSingleTweet(
   tweetId: string, 
   tweetText: string, 
-  tweetUrl: string
+  tweetUrl: string,
+  publishCastFn: (text: string) => Promise<FarcasterCastResult>
 ): Promise<{ success: boolean; hash?: string; error?: string }> {
   try {
     const castText = formatTweetForFarcaster(tweetText, tweetUrl)
-    const result = await publishCast(castText)
+    const result = await publishCastFn(castText)
     
     if (result.success && result.hash) {
       console.log(`Successfully crossposted tweet ${tweetId} to Farcaster: ${result.hash}`)

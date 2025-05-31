@@ -3,46 +3,46 @@ import { processPendingCrossposts, testFarcasterConnection } from '../../../../l
 
 export async function POST(request: NextRequest) {
   try {
-    console.log('Manual Farcaster crossposting triggered')
-    
-    // Process all pending crossposts
-    const result = await processPendingCrossposts()
-    
-    return NextResponse.json({
-      success: true,
-      message: 'Farcaster crossposting completed',
-      data: result
-    })
+    // For now, return an error since this endpoint requires React hooks
+    // This functionality should be moved to client-side components
+    return NextResponse.json(
+      { 
+        success: false, 
+        error: 'Farcaster crossposting must be done from the client-side with authenticated user' 
+      },
+      { status: 400 }
+    )
   } catch (error) {
-    console.error('Error in Farcaster crossposting:', error)
-    
-    return NextResponse.json({
-      success: false,
-      message: 'Farcaster crossposting failed',
-      error: error instanceof Error ? error.message : 'Unknown error'
-    }, { status: 500 })
+    console.error('Farcaster crosspost error:', error)
+    return NextResponse.json(
+      { 
+        success: false, 
+        error: error instanceof Error ? error.message : 'Unknown error' 
+      },
+      { status: 500 }
+    )
   }
 }
 
-export async function GET(request: NextRequest) {
+export async function GET() {
   try {
-    console.log('Testing Farcaster connection')
-    
-    // Test the Farcaster connection
-    const result = await testFarcasterConnection()
-    
-    return NextResponse.json({
-      success: result.success,
-      message: result.message,
-      timestamp: new Date().toISOString()
-    })
+    // For now, return an error since this endpoint requires React hooks
+    // This functionality should be moved to client-side components
+    return NextResponse.json(
+      { 
+        success: false, 
+        error: 'Farcaster connection testing must be done from the client-side with authenticated user' 
+      },
+      { status: 400 }
+    )
   } catch (error) {
-    console.error('Error testing Farcaster connection:', error)
-    
-    return NextResponse.json({
-      success: false,
-      message: 'Failed to test Farcaster connection',
-      error: error instanceof Error ? error.message : 'Unknown error'
-    }, { status: 500 })
+    console.error('Farcaster connection test error:', error)
+    return NextResponse.json(
+      { 
+        success: false, 
+        error: error instanceof Error ? error.message : 'Unknown error' 
+      },
+      { status: 500 }
+    )
   }
 } 

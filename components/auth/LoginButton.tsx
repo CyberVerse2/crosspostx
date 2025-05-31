@@ -11,7 +11,7 @@ export function LoginButton() {
     return (
       <div className="flex items-center gap-2">
         <span className="text-sm text-gray-600">
-          Welcome, {user?.twitter?.username || user?.email || 'User'}!
+          Welcome, {user?.farcaster?.username || user?.email || 'User'}!
         </span>
       </div>
     )
@@ -20,9 +20,9 @@ export function LoginButton() {
   return (
     <Button
       onClick={login}
-      className="bg-blue-500 hover:bg-blue-600 text-white"
+      className="bg-purple-500 hover:bg-purple-600 text-white"
     >
-      Connect with Twitter
+      Connect with Farcaster
     </Button>
   )
 } 

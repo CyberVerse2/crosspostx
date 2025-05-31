@@ -12,13 +12,13 @@ export default function Home() {
   if (loading) {
     return (
       <div className="flex items-center justify-center min-h-screen">
-        <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-blue-500"></div>
+        <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-purple-500"></div>
       </div>
     )
   }
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-blue-50 to-indigo-100">
+    <div className="min-h-screen bg-gradient-to-br from-purple-50 to-indigo-100">
       <header className="bg-white shadow-sm">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex justify-between items-center py-4">
@@ -51,14 +51,14 @@ export default function Home() {
           </h1>
           
           <p className="mt-6 text-lg leading-8 text-gray-600 max-w-2xl mx-auto">
-            Automatically monitor your Twitter accounts and seamlessly crosspost your tweets to Farcaster. 
-            Keep your audience engaged across both platforms effortlessly.
+            Connect with your Farcaster account and monitor any Twitter accounts to automatically 
+            crosspost tweets to Farcaster. No Twitter authentication required!
           </p>
 
           <div className="mt-10 flex items-center justify-center gap-x-6">
             {authenticated ? (
               <Link href="/dashboard">
-                <Button size="lg" className="bg-blue-600 hover:bg-blue-700 text-white">
+                <Button size="lg" className="bg-purple-600 hover:bg-purple-700 text-white">
                   Go to Dashboard
                 </Button>
               </Link>
@@ -82,9 +82,9 @@ export default function Home() {
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 10V3L4 14h7v7l9-11h-7z" />
                 </svg>
               </div>
-              <h3 className="text-lg font-semibold text-gray-900 mb-2">Real-time Monitoring</h3>
+              <h3 className="text-lg font-semibold text-gray-900 mb-2">No Twitter Auth Required</h3>
               <p className="text-gray-600">
-                Automatically monitor your Twitter accounts for new posts and crosspost them instantly to Farcaster.
+                Monitor any public Twitter account without needing to authenticate with Twitter. Just add usernames!
               </p>
             </div>
 
@@ -94,9 +94,9 @@ export default function Home() {
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
                 </svg>
               </div>
-              <h3 className="text-lg font-semibold text-gray-900 mb-2">Smart Filtering</h3>
+              <h3 className="text-lg font-semibold text-gray-900 mb-2">Farcaster Native</h3>
               <p className="text-gray-600">
-                Configure what gets crossposted with smart filters for retweets, replies, and media content.
+                Authenticate with your Farcaster account and post directly to your feed with proper formatting.
               </p>
             </div>
 
@@ -108,7 +108,7 @@ export default function Home() {
               </div>
               <h3 className="text-lg font-semibold text-gray-900 mb-2">Secure & Private</h3>
               <p className="text-gray-600">
-                Your data is secure with end-to-end encryption and privacy-first authentication via Privy.
+                Your Farcaster credentials are secure with Privy authentication and your own wallet.
               </p>
             </div>
           </div>
@@ -118,25 +118,25 @@ export default function Home() {
           <h2 className="text-3xl font-bold text-gray-900 mb-8">How it works</h2>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
             <div className="flex flex-col items-center">
-              <div className="bg-blue-100 rounded-full p-4 mb-4">
-                <span className="text-2xl font-bold text-blue-600">1</span>
+              <div className="bg-purple-100 rounded-full p-4 mb-4">
+                <span className="text-2xl font-bold text-purple-600">1</span>
               </div>
-              <h3 className="text-lg font-semibold mb-2">Connect Accounts</h3>
-              <p className="text-gray-600">Connect your Twitter and Farcaster accounts securely</p>
+              <h3 className="text-lg font-semibold mb-2">Connect Farcaster</h3>
+              <p className="text-gray-600">Sign in with your Farcaster account to enable posting</p>
+            </div>
+            <div className="flex flex-col items-center">
+              <div className="bg-blue-100 rounded-full p-4 mb-4">
+                <span className="text-2xl font-bold text-blue-600">2</span>
+              </div>
+              <h3 className="text-lg font-semibold mb-2">Add Twitter Accounts</h3>
+              <p className="text-gray-600">Add any public Twitter usernames you want to monitor</p>
             </div>
             <div className="flex flex-col items-center">
               <div className="bg-green-100 rounded-full p-4 mb-4">
-                <span className="text-2xl font-bold text-green-600">2</span>
-              </div>
-              <h3 className="text-lg font-semibold mb-2">Configure Settings</h3>
-              <p className="text-gray-600">Set up monitoring preferences and crosspost rules</p>
-            </div>
-            <div className="flex flex-col items-center">
-              <div className="bg-purple-100 rounded-full p-4 mb-4">
-                <span className="text-2xl font-bold text-purple-600">3</span>
+                <span className="text-2xl font-bold text-green-600">3</span>
               </div>
               <h3 className="text-lg font-semibold mb-2">Auto Crosspost</h3>
-              <p className="text-gray-600">Sit back and let CrossPostX handle the rest</p>
+              <p className="text-gray-600">New tweets are automatically crossposted to your Farcaster</p>
             </div>
           </div>
         </div>

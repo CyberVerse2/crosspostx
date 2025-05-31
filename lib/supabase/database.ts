@@ -196,4 +196,17 @@ export async function isTweetCrossposted(tweetId: string): Promise<boolean> {
 
   if (error) throw error
   return (data?.length || 0) > 0
+}
+
+// Get pending crossposts for processing
+export async function getPendingCrossposts(): Promise<CrosspostLog[]> {
+  const { data, error } = await supabaseAdmin
+    .from('crosspost_logs')
+    .select('*')
+    .eq('status', 'pending')
+    .order('created_at', { ascending: true }) // Process oldest first
+    .limit(50) // Limit to prevent overwhelming the system
+
+  if (error) throw error
+  return data || []
 } 

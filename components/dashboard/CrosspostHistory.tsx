@@ -3,7 +3,7 @@
 import { useState, useEffect } from 'react'
 import { useUser } from '../../hooks/useUser'
 import { CrosspostLog } from '../../types'
-import { getCrosspostHistory } from '../../lib/supabase/database'
+import { getCrosspostLogs } from '../../lib/supabase/database'
 
 export function CrosspostHistory() {
   const { user } = useUser()
@@ -17,7 +17,7 @@ export function CrosspostHistory() {
 
       try {
         setLoading(true)
-        const data = await getCrosspostHistory(user.id, 20) // Get last 20 crossposts
+        const data = await getCrosspostLogs(user.id, 20) // Get last 20 crossposts
         setCrossposts(data)
       } catch (err) {
         console.error('Error loading crosspost history:', err)

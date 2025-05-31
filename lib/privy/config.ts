@@ -1,10 +1,10 @@
 import { PrivyClientConfig } from '@privy-io/react-auth'
 
 export const privyConfig: PrivyClientConfig = {
-  loginMethods: ['twitter', 'farcaster'],
+  loginMethods: ['farcaster'],
   appearance: {
     theme: 'light',
-    accentColor: '#1DA1F2',
+    accentColor: '#8B5CF6',
     logo: '/logo.png',
   },
   embeddedWallets: {
